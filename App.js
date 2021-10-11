@@ -4,6 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './Screen/Home';
+import { Entypo, Ionicons, MaterialIcons  } from '@expo/vector-icons'; 
 import Detail from './Screen/Detail';
 import Setting from './Screen/Setting';
 
@@ -12,7 +13,29 @@ const Tab = createBottomTabNavigator();
 const App= () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
+      <Tab.Navigator
+      screenOptions = {({route}) => 
+      ({tabBarIcon:({focused}) => {
+        if(route.name === "Home")
+        {
+        return (
+        <Entypo name="home" size={24} color={focused? "blue":"black"} />
+        );
+        }
+        else if(route.name === "Setting")
+        {
+        return(
+        <Ionicons name="settings" size={24} color={focused? "blue":"black"} />
+        );
+        }
+        else 
+        {
+          return(
+        <MaterialIcons  name="details" size={24} color={focused? "blue":"black"} />
+        );
+        }
+      }})}
+      >
         <Tab.Screen
         name = "Home"
         component = {Home}
